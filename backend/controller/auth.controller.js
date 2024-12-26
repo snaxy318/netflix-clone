@@ -3,9 +3,7 @@ import { User } from "../model/user.model.js";
 export async function signup(req,res) {
     try {
         const {email,password,username} = req.body;
-        console.log(email);
 
-        
         //checking if all the feilds are propvided
         if(!email || !password || !username) {
             return res.status(400).json({success:false,message:"All the fields are required"});
@@ -46,6 +44,10 @@ export async function signup(req,res) {
         });
 
         await newUser.save();
+        res.status(201).json({success:true,user:{
+            ...newUser._doc,
+            password:""                             //removing password
+        }});
     } catch (err) {
         console.log("Error in signup controller",err.message);
         res.status(500).json({sucess:false,message:"Internal server error"});
