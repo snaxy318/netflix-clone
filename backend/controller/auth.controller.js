@@ -1,4 +1,5 @@
 import { User } from "../model/user.model.js";
+import bcryptjs from "bcryptjs";
 
 export async function signup(req,res) {
     try {
@@ -32,13 +33,17 @@ export async function signup(req,res) {
             return res.status(400).json({success:false,message:"Username already exists"});
         }
 
+        //hashing password
+        const salt = await bcryptjs.genSalt(10);
+        const hashedPassword = await bcryptjs.hash(password,salt);
+
         //create new user
         const PROFILE_PICS = ["/avatar1.png","/avatar2.png","/avatar3.png"]; 
         const image = PROFILE_PICS[Math.floor(Math.random()*PROFILE_PICS.length)];
 
         const newUser = new User({
             email,
-            password,
+            password:hashedPassword,
             username,
             image,
         });
