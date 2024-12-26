@@ -1,5 +1,41 @@
+import { User } from "../model/user.model.js";
+
 export async function signup(req,res) {
-    res.send("Signup route");
+    try {
+        const {email,password,username} = req.body;
+        console.log(email);
+
+        
+        //checking if all the feilds are propvided
+        if(!email || !password || !username) {
+            return res.status(400).json({success:false,message:"All the fields are required"});
+        }
+
+        //checking if email format is correct
+        const emailReg = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        if(!emailReg.test(email)) {
+            return res.status(400).json({success:false,message:"Give a correct Email"});
+        }
+
+        //checking the length of password
+        if(password.length<6){
+            return res.status(400).json({success:false,message:"Password should contain atleast 6 characters"});
+        }
+
+        //if email address already exists
+        const existingUserByEmail = await User.findOne({email:email});
+        if(existingUserByEmail){
+            return res.status(400).json({success:false,message:"Email already exists"});
+        }
+
+        //if username already exists
+        const existingUserByUsername = await User.findOne({username:username});
+        if(existingUserByUsername){
+            return res.status(400).json({success:false,message:"Username already exists"});
+        }
+    } catch (err) {
+        
+    }
 }
 
 export async function login(req,res) {
