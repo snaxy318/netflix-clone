@@ -33,8 +33,22 @@ export async function signup(req,res) {
         if(existingUserByUsername){
             return res.status(400).json({success:false,message:"Username already exists"});
         }
+
+        //create new user
+        const PROFILE_PICS = ["/avatar1.png","/avatar2.png","/avatar3.png"]; 
+        const image = PROFILE_PICS[Math.floor(Math.random()*PROFILE_PICS.length)];
+
+        const newUser = new User({
+            email,
+            password,
+            username,
+            image,
+        });
+
+        await newUser.save();
     } catch (err) {
-        
+        console.log("Error in signup controller",err.message);
+        res.status(500).json({sucess:false,message:"Internal server error"});
     }
 }
 
