@@ -88,7 +88,6 @@ export async function login(req,res) {
             },
         });   
     } catch (err) {
-        console.log("Error in login controller\n","Error: ",err.message);
         return res.status(500).json({success:false,message:"Internal server error"});
     }
 }
