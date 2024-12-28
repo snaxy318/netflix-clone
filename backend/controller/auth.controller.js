@@ -56,7 +56,7 @@ export async function signup(req,res) {
             password:""                             //removing password
         }});
     } catch (err) {
-        console.log("Error in signup controller",err.message);
+        console.log("Error in signup controller\n","Error: ",err.message);
         res.status(500).json({sucess:false,message:"Internal server error"});
     }
 }
@@ -66,5 +66,12 @@ export async function login(req,res) {
 }
 
 export async function logout(req,res){
-    res.send("Logout route");
+    try {
+        res.clearCookie("jwt-netflix");
+        res.status(200).json({success:true,message:"Logout out successfully"});
+        
+    } catch (err) {
+        console.log("Error in Loggin out\n","Error: ",err.message);
+        return res.status(500).json({success:false,message:"Internal server error"});
+    }
 }
