@@ -6,5 +6,6 @@ const router = express.Router();
 router.get('/trending',getTrendingMovie);
 router.get('/:id/trailer',getMovieTrailer);
 router.get('/:id/details',getMovieDetailes);
+router.get('/id/similar',getSimilarMovie);
 
 export default router;
