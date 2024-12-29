@@ -7,5 +7,6 @@ router.get('/trending',getTrendingMovie);
 router.get('/:id/trailer',getMovieTrailer);
 router.get('/:id/details',getMovieDetailes);
 router.get('/:id/similar',getSimilarMovies);
+router.get('/:category',getSimilarCategoryMovies);
 
 export default router;
