@@ -1,4 +1,5 @@
 import express from "express";
+import { searchPerson } from "../controller/search.controller";
 
 const router = express.Router();
 
