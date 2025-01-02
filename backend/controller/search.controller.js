@@ -1,20 +1,20 @@
-import { User } from "../model/user.model";
-import { fetchFromTMDB } from "../services/tmdb.service";
+import { User } from "../model/user.model.js";
+import { fetchFromTMDB } from "../services/tmdb.service.js";
 
 export async function searchPerson (req,res) {
     const {query} = req.params;
     try {
         const response = await fetchFromTMDB(`https://api.themoviedb.org/3/search/person?query=${query}&include_adult=false&language=en-US&page=1`);
 
-        if(response.result.length === 0) {
+        if(response.results.length === 0) {
             return res.status(404).send(null);
         }
 
-        await User.findByIdUpdate(req.user._id,{
+        await User.findByIdAndUpdate(req.user._id,{
             $push:{
                 searchHistory:{
                     id:response.results[0].id,
-                    image:response.result[0].profile_path,
+                    image:response.results[0].profile_path,
                     title:response.results[0].name,
                     searchType:"person",
                     createdAt: new Date(),
@@ -38,7 +38,7 @@ export async function searchMovie(req,res) {
             return res.status(404).send(null);
         }
 
-        await User.findByIdUpdate(req.user._id,{
+        await User.findByIdAndUpdate(req.user._id,{
             $push: {
                 searchHistory: {
                     id:response.result[0].id,
@@ -66,12 +66,12 @@ export async function searchTv(req,res) {
             return res.status(404).send(null);
         }
 
-        await User.findByIdUpdate(req.user._id,{
+        await User.findByIdAndUpdate(req.user._id,{
             $push: {
                 searchHistory: {
-                    id:response.result[0].id,
-                    image:response.result[0].poster_path,
-                    title:response.result[0].title,
+                    id:response.results[0].id,
+                    image:response.results[0].poster_path,
+                    title:response.results[0].title,
                     searchType:"tv",
                     createdAt: new Date(),
                 }
