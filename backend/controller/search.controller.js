@@ -92,3 +92,19 @@ export async function getSearchHistory(req,res) {
         res.status(500).json({success:false,message:"Internal server error"});
     }   
 }
+
+export async function removeItemFromSearchHistory(req,res) {
+    const {id} = req.params;
+    try {
+        await User.findByIdAndUpdate(req.user._id,{
+            $pull:{
+                searchHistory: {id:id},
+            },
+        });
+
+        res.status(200).json({success:true,message:"Item removed from search history"});
+    } catch (error) {
+        console.log("Error in removeItemFromSearcHistory controller: ",error.message);
+        res.status(500).json({success:false,message:"Internal server error"});
+    }
+}
