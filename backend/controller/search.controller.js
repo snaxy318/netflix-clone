@@ -94,7 +94,9 @@ export async function getSearchHistory(req,res) {
 }
 
 export async function removeItemFromSearchHistory(req,res) {
-    const {id} = req.params;
+    let {id} = req.params;
+    id = parseInt(id);
+
     try {
         await User.findByIdAndUpdate(req.user._id,{
             $pull:{
