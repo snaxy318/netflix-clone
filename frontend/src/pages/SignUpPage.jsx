@@ -24,7 +24,9 @@ const SignUpPage = () => {
                         placeholder="you@example.com"
                         id="email"
                         />
+                    </div>
 
+                    <div>
                         <label htmlFor="username" className="text-sm font-medium text-gray-300 block">
                             Username
                         </label>
@@ -34,7 +36,9 @@ const SignUpPage = () => {
                         placeholder="jhondoe"
                         id="username"
                         />
-
+                    </div>
+                        
+                    <div>
                         <label htmlFor="password" className="text-sm font-medium text-gray-300 block">
                             Password
                         </label>
@@ -44,11 +48,16 @@ const SignUpPage = () => {
                         placeholder="*******"
                         id="username"
                         />
-
-                        <div className="w-full py-2 mt-2 rounded-md bg-red-600 text-gray-300 text-center cursor-pointer hover:bg-red-700 px-">
-                            Sign Up
-                        </div>
                     </div>
+
+                    <div className="w-full py-2 mt-2 rounded-md bg-red-600 text-gray-300 text-center cursor-pointer hover:bg-red-700 px-">
+                        Sign Up
+                    </div>
+
+                    <div className="text-center text-gray-400">
+                        Already a member?{" "}
+                        <Link to={"/login"} className="text-red-500 hover:underline">Sign in</Link>
+                    </div>  
                 </form>
             </div>
 
