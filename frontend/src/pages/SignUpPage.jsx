@@ -24,6 +24,30 @@ const SignUpPage = () => {
                         placeholder="you@example.com"
                         id="email"
                         />
+
+                        <label htmlFor="username" className="text-sm font-medium text-gray-300 block">
+                            Username
+                        </label>
+                        <input 
+                        type="text" 
+                        className="w-full px-3 py-2 mt-1 border border-grey-700 rounded-md bg-transparent focus:outline-none focus:ring"
+                        placeholder="jhondoe"
+                        id="username"
+                        />
+
+                        <label htmlFor="password" className="text-sm font-medium text-gray-300 block">
+                            Password
+                        </label>
+                        <input 
+                        type="password" 
+                        className="w-full px-3 py-2 mt-1 border border-grey-700 rounded-md bg-transparent text-gray-300 focus:outline-none focus:ring"
+                        placeholder="*******"
+                        id="username"
+                        />
+
+                        <div className="w-full py-2 mt-2 rounded-md bg-red-600 text-gray-300 text-center cursor-pointer hover:bg-red-700 px-">
+                            Sign Up
+                        </div>
                     </div>
                 </form>
             </div>
